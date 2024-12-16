@@ -32361,8 +32361,8 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
       containerEl.createEl("br");
     }
     if (gitReady) {
-      new import_obsidian8.Setting(containerEl).setName("自动").setHeading();
-      new import_obsidian8.Setting(containerEl).setName("自动提交和推送分离").setDesc("启用使用独立计时器进行提交和推送").addToggle(
+      new import_obsidian8.Setting(containerEl).setName("Automatic").setHeading();
+      new import_obsidian8.Setting(containerEl).setName("Split automatic commit and push").setDesc("Enable to use separate timer for commit and push").addToggle(
         (toggle) => toggle.setValue(
           plugin.settings.differentIntervalCommitAndPush
         ).onChange((value) => {
@@ -32383,7 +32383,7 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
           this.display();
         })
       );
-      new import_obsidian8.Setting(containerEl).setName(`保险库 ${commitOrBackup} 间隔（分钟）`).setDesc(
+      new import_obsidian8.Setting(containerEl).setName(`Vault ${commitOrBackup} interval (minutes)`).setDesc(
         `${plugin.settings.differentIntervalCommitAndPush ? "Commit" : "Commit and push"} changes every X minutes. Set to 0 (default) to disable. (See below setting for further configuration!)`
       ).addText(
         (text2) => text2.setValue(String(plugin.settings.autoSaveInterval)).onChange((value) => {
@@ -32411,7 +32411,7 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
         })
       );
       if (!plugin.settings.setLastSaveToLastCommit)
-        new import_obsidian8.Setting(containerEl).setName(`停止文件编辑后自动备份`).setDesc(
+        new import_obsidian8.Setting(containerEl).setName(`Auto Backup after stopping file edits`).setDesc(
           `Requires the ${commitOrBackup} interval not to be 0.
                         If turned on, do auto ${commitOrBackup} every ${formatMinutes(
             plugin.settings.autoSaveInterval
@@ -32431,8 +32431,8 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
           })
         );
       if (!plugin.settings.autoBackupAfterFileChange)
-        new import_obsidian8.Setting(containerEl).setName(`在最新提交后自动 ${commitOrBackup}`).setDesc(
-          `如果打开，则将上次自动 ${commitOrBackup} 时间设置为最新提交`
+        new import_obsidian8.Setting(containerEl).setName(`Auto ${commitOrBackup} after latest commit`).setDesc(
+          `If turned on, set last auto ${commitOrBackup} time to latest commit`
         ).addToggle(
           (toggle) => toggle.setValue(plugin.settings.setLastSaveToLastCommit).onChange(async (value) => {
             plugin.settings.setLastSaveToLastCommit = value;
@@ -32443,8 +32443,8 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
           })
         );
       if (plugin.settings.differentIntervalCommitAndPush) {
-        new import_obsidian8.Setting(containerEl).setName(`仓库推送间隔（分钟）`).setDesc(
-          "每 X 分钟推送更改。设置为 0（默认）以禁用。"
+        new import_obsidian8.Setting(containerEl).setName(`Vault push interval (minutes)`).setDesc(
+          "Push changes every X minutes. Set to 0 (default) to disable."
         ).addText(
           (text2) => text2.setValue(String(plugin.settings.autoPushInterval)).onChange((value) => {
             if (!isNaN(Number(value))) {
@@ -32473,8 +32473,8 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
           })
         );
       }
-      new import_obsidian8.Setting(containerEl).setName("自动拉取间隔（分钟）").setDesc(
-        "每X分钟拉取更改。设置为0（默认）以禁用。"
+      new import_obsidian8.Setting(containerEl).setName("Auto pull interval (minutes)").setDesc(
+        "Pull changes every X minutes. Set to 0 (default) to disable."
       ).addText(
         (text2) => text2.setValue(String(plugin.settings.autoPullInterval)).onChange((value) => {
           if (!isNaN(Number(value))) {
@@ -32498,25 +32498,25 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
           }
         })
       );
-      new import_obsidian8.Setting(containerEl).setName("在自动备份时指定自定义提交信息").setDesc("你会弹出一个窗口来指定你的消息").addToggle(
+      new import_obsidian8.Setting(containerEl).setName("Specify custom commit message on auto backup").setDesc("You will get a pop up to specify your message").addToggle(
         (toggle) => toggle.setValue(plugin.settings.customMessageOnAutoBackup).onChange((value) => {
           plugin.settings.customMessageOnAutoBackup = value;
           plugin.saveSettings();
         })
       );
-      new import_obsidian8.Setting(containerEl).setName("自动备份/提交的提交信息").setDesc(
-        "可用的占位符：{{date}}（见下文），{{hostname}}（见下文），{{numFiles}}（提交中更改的文件数量）和{{files}}（提交消息中更改的文件）"
+      new import_obsidian8.Setting(containerEl).setName("Commit message on auto backup/commit").setDesc(
+        "Available placeholders: {{date}} (see below), {{hostname}} (see below), {{numFiles}} (number of changed files in the commit) and {{files}} (changed files in commit message)"
       ).addTextArea(
-        (text2) => text2.setPlaceholder("保险库备份：{{date}}").setValue(plugin.settings.autoCommitMessage).onChange((value) => {
+        (text2) => text2.setPlaceholder("vault backup: {{date}}").setValue(plugin.settings.autoCommitMessage).onChange((value) => {
           plugin.settings.autoCommitMessage = value;
           plugin.saveSettings();
         })
       );
-      new import_obsidian8.Setting(containerEl).setName("提交信息").setHeading();
-      new import_obsidian8.Setting(containerEl).setName("手动备份/提交的提交信息").setDesc(
-        "可用的占位符：{{date}}（见下文），{{hostname}}（见下文），{{numFiles}}（提交中更改的文件数量）和{{files}}（提交消息中更改的文件）"
+      new import_obsidian8.Setting(containerEl).setName("Commit message").setHeading();
+      new import_obsidian8.Setting(containerEl).setName("Commit message on manual backup/commit").setDesc(
+        "Available placeholders: {{date}} (see below), {{hostname}} (see below), {{numFiles}} (number of changed files in the commit) and {{files}} (changed files in commit message)"
       ).addTextArea(
-        (text2) => text2.setPlaceholder("保险库备份：{{date}}").setValue(
+        (text2) => text2.setPlaceholder("vault backup: {{date}}").setValue(
           plugin.settings.commitMessage ? plugin.settings.commitMessage : ""
         ).onChange((value) => {
           plugin.settings.commitMessage = value;
@@ -32531,7 +32531,7 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
       );
       datePlaceholderSetting.descEl.innerHTML = `
             Specify custom date format. E.g. "${DATE_TIME_FORMAT_SECONDS}. See <a href="https://momentjs.com">Moment.js</a> for more formats.`;
-      new import_obsidian8.Setting(containerEl).setName("{{hostname}} placeholder replacement").setDesc("为每个设备指定自定义主机名。").addText(
+      new import_obsidian8.Setting(containerEl).setName("{{hostname}} placeholder replacement").setDesc("Specify custom hostname for every device.").addText(
         (text2) => {
           var _a2;
           return text2.setValue((_a2 = plugin.localStorage.getHostname()) != null ? _a2 : "").onChange(async (value) => {
@@ -32539,24 +32539,24 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
           });
         }
       );
-      new import_obsidian8.Setting(containerEl).setName("预览提交信息").addButton(
-        (button) => button.setButtonText("预览").onClick(async () => {
+      new import_obsidian8.Setting(containerEl).setName("Preview commit message").addButton(
+        (button) => button.setButtonText("Preview").onClick(async () => {
           const commitMessagePreview = await plugin.gitManager.formatCommitMessage(
             plugin.settings.commitMessage
           );
           new import_obsidian8.Notice(`${commitMessagePreview}`);
         })
       );
-      new import_obsidian8.Setting(containerEl).setName("在提交内容中列出受提交影响的文件名").addToggle(
+      new import_obsidian8.Setting(containerEl).setName("List filenames affected by commit in the commit body").addToggle(
         (toggle) => toggle.setValue(plugin.settings.listChangedFilesInMessageBody).onChange((value) => {
           plugin.settings.listChangedFilesInMessageBody = value;
           plugin.saveSettings();
         })
       );
-      new import_obsidian8.Setting(containerEl).setName("备份").setHeading();
+      new import_obsidian8.Setting(containerEl).setName("Backup").setHeading();
       if (plugin.gitManager instanceof SimpleGit)
-        new import_obsidian8.Setting(containerEl).setName("同步方法").setDesc(
-          "选择处理远程 Git 仓库中新变更的方法。"
+        new import_obsidian8.Setting(containerEl).setName("Sync Method").setDesc(
+          "Selects the method used for handling new changes found in your remote git repository."
         ).addDropdown((dropdown) => {
           const options = {
             merge: "Merge",
@@ -32570,31 +32570,31 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
             plugin.saveSettings();
           });
         });
-      new import_obsidian8.Setting(containerEl).setName("启动时检查更新").setDesc("启动 Obsidian 时自动拉取更新").addToggle(
+      new import_obsidian8.Setting(containerEl).setName("Pull updates on startup").setDesc("Automatically pull updates when Obsidian starts").addToggle(
         (toggle) => toggle.setValue(plugin.settings.autoPullOnBoot).onChange((value) => {
           plugin.settings.autoPullOnBoot = value;
           plugin.saveSettings();
         })
       );
-      new import_obsidian8.Setting(containerEl).setName("备份推送").setDesc("禁用以仅提交更改").addToggle(
+      new import_obsidian8.Setting(containerEl).setName("Push on backup").setDesc("Disable to only commit changes").addToggle(
         (toggle) => toggle.setValue(!plugin.settings.disablePush).onChange((value) => {
           plugin.settings.disablePush = !value;
           plugin.saveSettings();
         })
       );
-      new import_obsidian8.Setting(containerEl).setName("在推送前拉取变更").setDesc("提交 -> 拉取 -> 推送（仅当启用推送时）").addToggle(
+      new import_obsidian8.Setting(containerEl).setName("Pull changes before push").setDesc("Commit -> pull -> push (Only if pushing is enabled)").addToggle(
         (toggle) => toggle.setValue(plugin.settings.pullBeforePush).onChange((value) => {
           plugin.settings.pullBeforePush = value;
           plugin.saveSettings();
         })
       );
       if (plugin.gitManager instanceof SimpleGit) {
-        new import_obsidian8.Setting(containerEl).setName("行作者信息").setHeading();
+        new import_obsidian8.Setting(containerEl).setName("Line author information").setHeading();
         this.addLineAuthorInfoSettings();
       }
     }
-    new import_obsidian8.Setting(containerEl).setName("历史视图").setHeading();
-    new import_obsidian8.Setting(containerEl).setName("显示作者").setDesc("在历史视图中显示提交的作者").addDropdown((dropdown) => {
+    new import_obsidian8.Setting(containerEl).setName("History view").setHeading();
+    new import_obsidian8.Setting(containerEl).setName("Show Author").setDesc("Show the author of the commit in the history view").addDropdown((dropdown) => {
       const options = {
         hide: "Hide",
         full: "Full",
@@ -32608,8 +32608,8 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
         plugin.refresh();
       });
     });
-    new import_obsidian8.Setting(containerEl).setName("显示日期").setDesc(
-      "在历史视图中显示提交的日期。使用 {{date}} 占位符格式来显示日期。"
+    new import_obsidian8.Setting(containerEl).setName("Show Date").setDesc(
+      "Show the date of the commit in the history view. The {{date}} placeholder format is used to display the date."
     ).addToggle(
       (toggle) => toggle.setValue(plugin.settings.dateInHistoryView).onChange((value) => {
         plugin.settings.dateInHistoryView = value;
@@ -32617,19 +32617,19 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
         plugin.refresh();
       })
     );
-    new import_obsidian8.Setting(containerEl).setName("源代码控制视图").setHeading();
+    new import_obsidian8.Setting(containerEl).setName("Source control view").setHeading();
     new import_obsidian8.Setting(containerEl).setName(
-      "自动在文件更改时刷新源控制视图"
+      "Automatically refresh source control view on file changes"
     ).setDesc(
-      "在较慢的机器上，这可能会导致延迟。如果出现这种情况，请禁用此选项。"
+      "On slower machines this may cause lags. If so, just disable this option"
     ).addToggle(
       (toggle) => toggle.setValue(plugin.settings.refreshSourceControl).onChange((value) => {
         plugin.settings.refreshSourceControl = value;
         plugin.saveSettings();
       })
     );
-    new import_obsidian8.Setting(containerEl).setName("源代码控制视图刷新间隔").setDesc(
-      "在文件更改后等待的毫秒数，之后刷新源代码控制视图"
+    new import_obsidian8.Setting(containerEl).setName("Source control view refresh interval").setDesc(
+      "Milliseconds to wait after file change before refreshing the Source Control View"
     ).addText(
       (toggle) => toggle.setValue(
         plugin.settings.refreshSourceControlTimer.toString()
@@ -32642,9 +32642,9 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
         plugin.setRefreshDebouncer();
       })
     );
-    new import_obsidian8.Setting(containerEl).setName("杂项").setHeading();
-    new import_obsidian8.Setting(containerEl).setName("禁用通知").setDesc(
-      "禁用 Git 操作的通知以减少干扰（请参阅状态栏以获取更新）。即使启用此设置，错误仍会以通知形式显示。"
+    new import_obsidian8.Setting(containerEl).setName("Miscellaneous").setHeading();
+    new import_obsidian8.Setting(containerEl).setName("Disable notifications").setDesc(
+      "Disable notifications for git operations to minimize distraction (refer to status bar for updates). Errors are still shown as notifications even if you enable this setting"
     ).addToggle(
       (toggle) => toggle.setValue(plugin.settings.disablePopups).onChange((value) => {
         plugin.settings.disablePopups = value;
@@ -32653,50 +32653,50 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
       })
     );
     if (!plugin.settings.disablePopups)
-      new import_obsidian8.Setting(containerEl).setName("隐藏无更改的通知").setDesc(
-        "当没有更改要提交/推送时，不显示通知"
+      new import_obsidian8.Setting(containerEl).setName("Hide notifications for no changes").setDesc(
+        "Don't show notifications when there are no changes to commit/push"
       ).addToggle(
         (toggle) => toggle.setValue(plugin.settings.disablePopupsForNoChanges).onChange((value) => {
           plugin.settings.disablePopupsForNoChanges = value;
           plugin.saveSettings();
         })
       );
-    new import_obsidian8.Setting(containerEl).setName("显示状态栏").setDesc(
-      "Obsidian 必须重启以使更改生效"
+    new import_obsidian8.Setting(containerEl).setName("Show status bar").setDesc(
+      "Obsidian must be restarted for the changes to take affect"
     ).addToggle(
       (toggle) => toggle.setValue(plugin.settings.showStatusBar).onChange((value) => {
         plugin.settings.showStatusBar = value;
         plugin.saveSettings();
       })
     );
-    new import_obsidian8.Setting(containerEl).setName("在文件菜单中显示添加/取消添加按钮").addToggle(
+    new import_obsidian8.Setting(containerEl).setName("Show stage/unstage button in file menu").addToggle(
       (toggle) => toggle.setValue(plugin.settings.showFileMenu).onChange((value) => {
         plugin.settings.showFileMenu = value;
         plugin.saveSettings();
       })
     );
-    new import_obsidian8.Setting(containerEl).setName("显示分支状态栏").setDesc(
-      "Obsidian 必须重启以使更改生效"
+    new import_obsidian8.Setting(containerEl).setName("Show branch status bar").setDesc(
+      "Obsidian must be restarted for the changes to take affect"
     ).addToggle(
       (toggle) => toggle.setValue(plugin.settings.showBranchStatusBar).onChange((value) => {
         plugin.settings.showBranchStatusBar = value;
         plugin.saveSettings();
       })
     );
-    new import_obsidian8.Setting(containerEl).setName("在状态栏显示已修改文件的数量").addToggle(
+    new import_obsidian8.Setting(containerEl).setName("Show the count of modified files in the status bar").addToggle(
       (toggle) => toggle.setValue(plugin.settings.changedFilesInStatusBar).onChange((value) => {
         plugin.settings.changedFilesInStatusBar = value;
         plugin.saveSettings();
       })
     );
     if (plugin.gitManager instanceof IsomorphicGit) {
-      new import_obsidian8.Setting(containerEl).setName("认证/提交作者").setHeading();
+      new import_obsidian8.Setting(containerEl).setName("Authentication/commit author").setHeading();
     } else {
-      new import_obsidian8.Setting(containerEl).setName("提交作者").setHeading();
+      new import_obsidian8.Setting(containerEl).setName("Commit author").setHeading();
     }
     if (plugin.gitManager instanceof IsomorphicGit)
       new import_obsidian8.Setting(containerEl).setName(
-        "你在 Git 服务器上的用户名。例如你在 GitHub 上的用户名。"
+        "Username on your git server. E.g. your username on GitHub"
       ).addText((cb) => {
         var _a2;
         cb.setValue((_a2 = plugin.localStorage.getUsername()) != null ? _a2 : "");
@@ -32705,8 +32705,8 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
         });
       });
     if (plugin.gitManager instanceof IsomorphicGit)
-      new import_obsidian8.Setting(containerEl).setName("密码/个人访问令牌").setDesc(
-        "输入你的密码。你将无法再次查看它。"
+      new import_obsidian8.Setting(containerEl).setName("Password/Personal access token").setDesc(
+        "Type in your password. You won't be able to see it again."
       ).addText((cb) => {
         cb.inputEl.autocapitalize = "off";
         cb.inputEl.autocomplete = "off";
@@ -32716,7 +32716,7 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
         });
       });
     if (plugin.gitReady)
-      new import_obsidian8.Setting(containerEl).setName("提交的作者名称").addText(async (cb) => {
+      new import_obsidian8.Setting(containerEl).setName("Author name for commit").addText(async (cb) => {
         cb.setValue(await plugin.gitManager.getConfig("user.name"));
         cb.onChange((value) => {
           plugin.gitManager.setConfig(
@@ -32726,7 +32726,7 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
         });
       });
     if (plugin.gitReady)
-      new import_obsidian8.Setting(containerEl).setName("作者邮箱用于提交").addText(async (cb) => {
+      new import_obsidian8.Setting(containerEl).setName("Author email for commit").addText(async (cb) => {
         cb.setValue(
           await plugin.gitManager.getConfig("user.email")
         );
@@ -32737,10 +32737,10 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
           );
         });
       });
-    new import_obsidian8.Setting(containerEl).setName("高级").setHeading();
+    new import_obsidian8.Setting(containerEl).setName("Advanced").setHeading();
     if (plugin.gitManager instanceof SimpleGit) {
-      new import_obsidian8.Setting(containerEl).setName("更新子模块").setDesc(
-        '创建备份”和“拉取”会处理子模块。缺失的功能：冲突文件，已拉取/推送/提交的文件数量。每个子模块需要设置跟踪分支。'
+      new import_obsidian8.Setting(containerEl).setName("Update submodules").setDesc(
+        '"Create backup" and "pull" takes care of submodules. Missing features: Conflicted files, count of pulled/pushed/committed files. Tracking branch needs to be set for each submodule'
       ).addToggle(
         (toggle) => toggle.setValue(plugin.settings.updateSubmodules).onChange((value) => {
           plugin.settings.updateSubmodules = value;
@@ -32748,8 +32748,8 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
         })
       );
       if (plugin.settings.updateSubmodules) {
-        new import_obsidian8.Setting(containerEl).setName("子模块递归检出/切换").setDesc(
-          "每当在根仓库上进行检出时，对子模块递归进行检出（如果分支存在）。"
+        new import_obsidian8.Setting(containerEl).setName("Submodule recurse checkout/switch").setDesc(
+          "Whenever a checkout happens on the root repository, recurse the checkout on the submodules (if the branches exist)."
         ).addToggle(
           (toggle) => toggle.setValue(plugin.settings.submoduleRecurseCheckout).onChange((value) => {
             plugin.settings.submoduleRecurseCheckout = value;
@@ -32759,7 +32759,7 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
       }
     }
     if (plugin.gitManager instanceof SimpleGit)
-      new import_obsidian8.Setting(containerEl).setName("自定义 Git 二进制文件路径").addText((cb) => {
+      new import_obsidian8.Setting(containerEl).setName("Custom Git binary path").addText((cb) => {
         var _a2;
         cb.setValue((_a2 = plugin.localStorage.getGitPath()) != null ? _a2 : "");
         cb.setPlaceholder("git");
@@ -32769,48 +32769,48 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
         });
       });
     if (plugin.gitManager instanceof SimpleGit)
-      new import_obsidian8.Setting(containerEl).setName("附加的环境变量").setDesc(
-        "使用每行来表示一个新的环境变量，格式为 KEY=VALUE"
+      new import_obsidian8.Setting(containerEl).setName("Additional environment variables").setDesc(
+        "Use each line for a new environment variable in the format KEY=VALUE"
       ).addTextArea((cb) => {
-        cb.setPlaceholder("GIT_DIR=/path/to/git/目录");
+        cb.setPlaceholder("GIT_DIR=/path/to/git/dir");
         cb.setValue(plugin.localStorage.getEnvVars().join("\n"));
         cb.onChange((value) => {
           plugin.localStorage.setEnvVars(value.split("\n"));
         });
       });
     if (plugin.gitManager instanceof SimpleGit)
-      new import_obsidian8.Setting(containerEl).setName("附加的 PATH 环境变量路径").setDesc("每行使用一个路径").addTextArea((cb) => {
+      new import_obsidian8.Setting(containerEl).setName("Additional PATH environment variable paths").setDesc("Use each line for one path").addTextArea((cb) => {
         cb.setValue(plugin.localStorage.getPATHPaths().join("\n"));
         cb.onChange((value) => {
           plugin.localStorage.setPATHPaths(value.split("\n"));
         });
       });
     if (plugin.gitManager instanceof SimpleGit)
-      new import_obsidian8.Setting(containerEl).setName("使用新的环境变量重新加载").setDesc(
+      new import_obsidian8.Setting(containerEl).setName("Reload with new environment variables").setDesc(
         "Removing previously added environment variables will not take effect until Obsidian is restarted."
       ).addButton((cb) => {
-        cb.setButtonText("重新加载");
+        cb.setButtonText("Reload");
         cb.setCta();
         cb.onClick(() => {
           plugin.gitManager.setGitInstance();
         });
       });
-    new import_obsidian8.Setting(containerEl).setName("自定义基础路径（Git 仓库路径）").setDesc(
+    new import_obsidian8.Setting(containerEl).setName("Custom base path (Git repository path)").setDesc(
       `
             Sets the relative path to the vault from which the Git binary should be executed.
              Mostly used to set the path to the Git repository, which is only required if the Git repository is below the vault root directory. Use "\\" instead of "/" on Windows.
             `
     ).addText((cb) => {
       cb.setValue(plugin.settings.basePath);
-      cb.setPlaceholder("目录/带 Git 仓库的目录");
+      cb.setPlaceholder("directory/directory-with-git-repo");
       cb.onChange((value) => {
         plugin.settings.basePath = value;
         plugin.saveSettings();
         plugin.gitManager.updateBasePath(value || "");
       });
     });
-    new import_obsidian8.Setting(containerEl).setName("自定义 Git 目录路径（而不是 '.git'）").setDesc(
-      `需要重启 Obsidian 才能生效。在 Windows 上使用 "\\" 代替 "/".`
+    new import_obsidian8.Setting(containerEl).setName("Custom Git directory path (Instead of '.git')").setDesc(
+      `Requires restart of Obsidian to take effect. Use "\\" instead of "/" on Windows.`
     ).addText((cb) => {
       cb.setValue(plugin.settings.gitDir);
       cb.setPlaceholder(".git");
@@ -32819,8 +32819,8 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
         plugin.saveSettings();
       });
     });
-    new import_obsidian8.Setting(containerEl).setName("在此设备上禁用").setDesc(
-      "在该设备上禁用插件。此设置不会同步。"
+    new import_obsidian8.Setting(containerEl).setName("Disable on this device").setDesc(
+      "Disables the plugin on this device. This setting is not synced."
     ).addToggle(
       (toggle) => toggle.setValue(plugin.localStorage.getPluginDisabled()).onChange((value) => {
         plugin.localStorage.setPluginDisabled(value);
@@ -32834,9 +32834,9 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
         );
       })
     );
-    new import_obsidian8.Setting(containerEl).setName("支持").setHeading();
-    new import_obsidian8.Setting(containerEl).setName("捐赠").setDesc(
-      "如果你喜欢这个插件，考虑捐款支持持续开发。"
+    new import_obsidian8.Setting(containerEl).setName("Support").setHeading();
+    new import_obsidian8.Setting(containerEl).setName("Donate").setDesc(
+      "If you like this Plugin, consider donating to support continued development."
     ).addButton((bt) => {
       bt.buttonEl.outerHTML = "<a href='https://ko-fi.com/F1F195IQ5' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>";
     });
@@ -32844,7 +32844,7 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
     debugDiv.setAttr("align", "center");
     debugDiv.setAttr("style", "margin: var(--size-4-2)");
     const debugButton = debugDiv.createEl("button");
-    debugButton.setText("复制调试信息");
+    debugButton.setText("Copy Debug Information");
     debugButton.onclick = () => {
       window.navigator.clipboard.writeText(
         JSON.stringify(
@@ -32907,10 +32907,10 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
   }
   addLineAuthorInfoSettings() {
     const baseLineAuthorInfoSetting = new import_obsidian8.Setting(this.containerEl).setName(
-      "在每行旁边显示提交作者信息"
+      "Show commit authoring information next to each line"
     );
     if (!this.plugin.lineAuthoringFeature.isAvailableOnCurrentPlatform()) {
-      baseLineAuthorInfoSetting.setDesc("目前仅在桌面版可用。").setDisabled(true);
+      baseLineAuthorInfoSetting.setDesc("Only available on desktop currently.").setDisabled(true);
     }
     baseLineAuthorInfoSetting.descEl.innerHTML = `
             <a href="${LINE_AUTHOR_FEATURE_WIKI_LINK}">Feature guide and quick examples</a></br>
@@ -32922,7 +32922,7 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
       })
     );
     if (this.settings.lineAuthor.show) {
-      const trackMovement = new import_obsidian8.Setting(this.containerEl).setName("跟随文件和提交中的移动和复制").setDesc("").addDropdown((dropdown) => {
+      const trackMovement = new import_obsidian8.Setting(this.containerEl).setName("Follow movement and copies across files and commits").setDesc("").addDropdown((dropdown) => {
         dropdown.addOptions({
           inactive: "Do not follow (default)",
           "same-commit": "Follow within same commit",
@@ -32942,13 +32942,13 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
                 <br/>
                 It uses <a href="https://git-scm.com/docs/git-blame">git-blame</a> and
                 for matches (at least ${GIT_LINE_AUTHORING_MOVEMENT_DETECTION_MINIMAL_LENGTH} characters) within the same (or all) commit(s), <em>the originating</em> commit's information is shown.`;
-      new import_obsidian8.Setting(this.containerEl).setName("显示提交哈希值").addToggle((tgl) => {
+      new import_obsidian8.Setting(this.containerEl).setName("Show commit hash").addToggle((tgl) => {
         tgl.setValue(this.settings.lineAuthor.showCommitHash);
         tgl.onChange(
           async (value) => this.lineAuthorSettingHandler("showCommitHash", value)
         );
       });
-      new import_obsidian8.Setting(this.containerEl).setName("作者名称显示").setDesc("作者的显示方式（如果有）").addDropdown((dropdown) => {
+      new import_obsidian8.Setting(this.containerEl).setName("Author name display").setDesc("If and how the author is displayed").addDropdown((dropdown) => {
         const options = {
           hide: "Hide",
           initials: "Initials (default)",
@@ -32962,8 +32962,8 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
           async (value) => this.lineAuthorSettingHandler("authorDisplay", value)
         );
       });
-      new import_obsidian8.Setting(this.containerEl).setName("作者撰写日期显示").setDesc(
-        "作者编写行的日期和时间的显示方式（如果有的话）"
+      new import_obsidian8.Setting(this.containerEl).setName("Authoring date display").setDesc(
+        "If and how the date and time of authoring the line is displayed"
       ).addDropdown((dropdown) => {
         const options = {
           hide: "Hide",
@@ -32990,7 +32990,7 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
         const dateTimeFormatCustomStringSetting = new import_obsidian8.Setting(
           this.containerEl
         );
-        dateTimeFormatCustomStringSetting.setName("自定义作者日期格式").addText((cb) => {
+        dateTimeFormatCustomStringSetting.setName("Custom authoring date format").addText((cb) => {
           cb.setValue(
             this.settings.lineAuthor.dateTimeFormatCustomString
           );
@@ -33009,7 +33009,7 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
           this.settings.lineAuthor.dateTimeFormatCustomString
         );
       }
-      new import_obsidian8.Setting(this.containerEl).setName("作者日期显示时区").addDropdown((dropdown) => {
+      new import_obsidian8.Setting(this.containerEl).setName("Authoring date display timezone").addDropdown((dropdown) => {
         const options = {
           "viewer-local": "My local (default)",
           "author-local": "Author's local",
@@ -33029,7 +33029,7 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
                     <a href="https://en.wikipedia.org/wiki/UTC%C2%B100:00">UTC\xB100:00</a>.
             `;
       const oldestAgeSetting = new import_obsidian8.Setting(this.containerEl).setName(
-        "最古老的着色年龄"
+        "Oldest age in coloring"
       );
       oldestAgeSetting.descEl.innerHTML = this.previewOldestAgeDescriptionHtml(
         this.settings.lineAuthor.coloringMaxAge
@@ -33048,7 +33048,7 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
       });
       this.createColorSetting("newest");
       this.createColorSetting("oldest");
-      new import_obsidian8.Setting(this.containerEl).setName("文本颜色").addText((field) => {
+      new import_obsidian8.Setting(this.containerEl).setName("Text color").addText((field) => {
         field.setValue(this.settings.lineAuthor.textColorCss);
         field.onChange((value) => {
           this.lineAuthorSettingHandler("textColorCss", value);
@@ -33068,7 +33068,7 @@ var ObsidianGitSettingsTab = class extends import_obsidian8.PluginSettingTab {
                     List of available CSS variables in Obsidian
                     <a/>
                 `;
-      new import_obsidian8.Setting(this.containerEl).setName("忽略更改中的空格和换行").addToggle((tgl) => {
+      new import_obsidian8.Setting(this.containerEl).setName("Ignore whitespace and newlines in changes").addToggle((tgl) => {
         tgl.setValue(this.settings.lineAuthor.ignoreWhitespace);
         tgl.onChange(
           (value) => this.lineAuthorSettingHandler("ignoreWhitespace", value)
@@ -34357,7 +34357,7 @@ var ChangedFilesModal = class extends import_obsidian14.FuzzySuggestModal {
     this.plugin = plugin;
     this.changedFiles = changedFiles;
     this.setPlaceholder(
-      "不支持的文件将默认由默认应用程序打开！"
+      "Not supported files will be opened by default app!"
     );
   }
   getItems() {
@@ -34396,7 +34396,7 @@ var CustomMessageModal = class extends import_obsidian15.SuggestModal {
     this.resolve = null;
     this.plugin = plugin;
     this.setPlaceholder(
-      "输入您的信息并可选地选择带有添加日期的版本。"
+      "Type your message and select optional the version with the added date."
     );
   }
   open() {
@@ -39541,7 +39541,7 @@ var BranchModal = class extends import_obsidian22.FuzzySuggestModal {
   constructor(branches) {
     super(app);
     this.branches = branches;
-    this.setPlaceholder("选择要检出的分支");
+    this.setPlaceholder("Select branch to checkout");
   }
   getItems() {
     return this.branches;
@@ -39581,7 +39581,7 @@ var IgnoreModal = class extends import_obsidian23.Modal {
   }
   onOpen() {
     const { contentEl, titleEl } = this;
-    titleEl.setText("编辑 .gitignore");
+    titleEl.setText("Edit .gitignore");
     const div = contentEl.createDiv();
     const text2 = div.createEl("textarea", {
       text: this.content,
@@ -39646,7 +39646,7 @@ var DiscardModal = class extends import_obsidian24.Modal {
       if (this.resolve) this.resolve(true);
       this.close();
     });
-    const close = div.createEl("按钮", {
+    const close = div.createEl("button", {
       text: "Cancel"
     });
     close.addEventListener("click", () => {

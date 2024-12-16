@@ -2,6 +2,8 @@
 
 这是我的obsidian技巧分享库，同时这个仓库也是一个obsidian vault，你可以直接下载并用obsidian打开它，它就会变成一个开箱即用的obsidian示例库。
 
+如果你想看到更多我的文章，欢迎来我的博客：[荒原往事](https://qlog.9udange.top/)
+
 
 ## 我的笔记工作流
 
@@ -28,7 +30,15 @@
 
 ## obsidian插件推荐 
 
+### obsidian-i18n
+
+这是一个obsidian插件翻译工具，由02开发，我也做了一些贡献，然后在一些志同道合的朋友的共同努力下，我们已经完成了接近300个插件的翻译。
+
+如果你更喜欢使用中文界面的软件，建议体验一下，应该是目前汉化体验最好的方法了。
+
 ### excalidraw
+
+这是一个白板工具，但是它的功能强大绝对超乎你的想象。
 
 #### excalidraw线性输出脚本
 
@@ -38,6 +48,11 @@
 
 [视频教程](https://www.bilibili.com/video/BV1X3pteUEU1/)
 
-[文字教程](https://qlog.9udange.top/105-%E6%9E%81%E5%AE%A2/%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7/%E4%B8%80%E9%94%AE%E6%8A%8Aexcalidraw%E7%9A%84%E5%A4%B4%E8%84%91%E9%A3%8E%E6%9A%B4%E8%BE%93%E5%87%BA%E4%B8%BA%E7%BA%BF%E6%80%A7%E6%96%87%E7%AB%A0/)
+[文字教程](https://qlog.9udange.top/Obsidian/%E4%B8%80%E9%94%AE%E6%8A%8Aexcalidraw%E7%9A%84%E5%A4%B4%E8%84%91%E9%A3%8E%E6%9A%B4%E8%BE%93%E5%87%BA%E4%B8%BA%E7%BA%BF%E6%80%A7%E6%96%87%E7%AB%A0/)
 
+### anyblock插件
+
+提供了几乎无侵入式的md编辑强化体验，本示例库的日记中就用到了滚动样式，这是一个很有意思的插件，建议去设置页面复制它的示例代码来自己上手体验一下。
+
+ps：这个插件最大的缺点就是作者的文档写的很乱。
 

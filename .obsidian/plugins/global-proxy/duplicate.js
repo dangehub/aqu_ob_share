@@ -58,7 +58,7 @@ var GlobalProxyPlugin = class extends import_obsidian.Plugin {
 		}
 
 		if (proxyRules) {
-			new import_obsidian.Notice('启用代理！');
+			new import_obsidian.Notice('Enable proxy!');
 		}
 	}
 	
@@ -73,7 +73,7 @@ var GlobalProxyPlugin = class extends import_obsidian.Plugin {
 			await sessions[i].setProxy({});
 			await sessions[i].closeAllConnections();
 		}
-		new import_obsidian.Notice('关闭代理！');
+		new import_obsidian.Notice('Disable proxy!');
 	}
 	
 	
@@ -109,7 +109,7 @@ var GlobalProxySettingTab = class extends import_obsidian.PluginSettingTab {
     containerEl.empty();
 	new import_obsidian.Setting(containerEl)
 	.setName("Enable proxy")
-	.setDesc("更改你的代理状态")
+	.setDesc("Change your proxy status")
 	.addToggle((val) => val
 	.setValue(this.plugin.settings.enableProxy)
 	.onChange(async (value) =>  {
@@ -119,7 +119,7 @@ var GlobalProxySettingTab = class extends import_obsidian.PluginSettingTab {
     }));
 	new import_obsidian.Setting(containerEl)
 	.setName("Socks Proxy")
-	.setDesc("设置你的 Socks 代理")
+	.setDesc("Set up your socks proxy")
 	.addText((text) => text
 	.setPlaceholder("<scheme>://<host>:<port>")
 	.setValue(this.plugin.settings.socksProxy)
@@ -128,7 +128,7 @@ var GlobalProxySettingTab = class extends import_obsidian.PluginSettingTab {
     }));
 	new import_obsidian.Setting(containerEl)
 	.setName("Http Proxy")
-	.setDesc("设置你的 HTTP 代理")
+	.setDesc("Set up your http proxy")
 	.addText((text) => text
 	.setPlaceholder("<scheme>://<host>:<port>")
 	.setValue(this.plugin.settings.httpProxy)
@@ -137,7 +137,7 @@ var GlobalProxySettingTab = class extends import_obsidian.PluginSettingTab {
     }));
 	new import_obsidian.Setting(containerEl)
 	.setName("Https Proxy")
-	.setDesc("设置你的 HTTPS 代理")
+	.setDesc("Set up your https proxy")
 	.addText((text) => text
 	.setPlaceholder("<scheme>://<host>:<port>")
 	.setValue(this.plugin.settings.httpsProxy)
@@ -145,7 +145,7 @@ var GlobalProxySettingTab = class extends import_obsidian.PluginSettingTab {
 	  this.refreshProxy("httpsProxy", value);      
     }));
 	new import_obsidian.Setting(containerEl)
-	.setName("插件 Tokens")
+	.setName("Plugin Tokens")
 	.setDesc("For proxy specified plugins")
 	.addTextArea((text) => text
 	.setValue(this.plugin.settings.pluginTokens)
@@ -153,7 +153,7 @@ var GlobalProxySettingTab = class extends import_obsidian.PluginSettingTab {
 	  this.refreshProxy("pluginTokens", value);  
     }));
 	new import_obsidian.Setting(containerEl)
-	.setName("黑名单")
+	.setName("Blacklist")
 	.setDesc("Proxy blacklist")
 	.addTextArea((text) => text
 	.setPlaceholder("[URL_SCHEME://] HOSTNAME_PATTERN [:<port>]\n. HOSTNAME_SUFFIX_PATTERN [:PORT]\n[SCHEME://] IP_LITERAL [:PORT]\nIP_LITERAL / PREFIX_LENGTH_IN_BITS\n<local>")

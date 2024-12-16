@@ -6,5 +6,8 @@
   "any-block",
   "dust-calendar",
   "dataview",
-  "floating-toc"
+  "floating-toc",
+  "obsidian-memos",
+  "obsidian42-brat",
+  "i18n"
 ]
