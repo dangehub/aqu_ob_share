@@ -1,5 +1,15 @@
 # 这个库是做什么的
 
+  
+
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/dangehub/aqu_ob_share/total)
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+
+
 这是我的obsidian技巧分享库，同时这个仓库也是一个obsidian vault，你可以直接下载并用obsidian打开它，它就会变成一个开箱即用的obsidian示例库。
 
 如果你想看到更多我的文章，欢迎来我的博客：[荒原往事](https://qlog.9udange.top/)
@@ -56,3 +66,28 @@
 
 ps：这个插件最大的缺点就是作者的文档写的很乱。
 
+  
+
+<!-- links -->
+
+[your-project-path]:dangehub/aqu_ob_share
+
+[contributors-shield]: https://img.shields.io/github/contributors/dangehub/aqu_ob_share.svg?style=flat-square
+
+[contributors-url]: https://github.com/dangehub/aqu_ob_share/graphs/contributors
+
+[forks-shield]: https://img.shields.io/github/forks/dangehub/aqu_ob_share.svg?style=flat-square
+
+[forks-url]: https://github.com/dangehub/aqu_ob_share/network/members
+
+[stars-shield]: https://img.shields.io/github/stars/dangehub/aqu_ob_share.svg?style=flat-square
+
+[stars-url]: https://github.com/dangehub/aqu_ob_share/stargazers
+
+[issues-shield]: https://img.shields.io/github/issues/dangehub/aqu_ob_share.svg?style=flat-square
+
+[issues-url]: https://img.shields.io/github/issues/dangehub/aqu_ob_share.svg
+
+[license-shield]: https://img.shields.io/github/license/dangehub/aqu_ob_share.svg?style=flat-square
+
+[license-url]: https://github.com/dangehub/aqu_ob_share/blob/master/LICENSE.txt
